@@ -57,8 +57,10 @@ __pycache__/
 .DS_Store
 .venv/
 .env
+```
+
 5. Commit Messages
-bash
+```bash
 git add .
 git commit -m "🎓 Initial commit: Complete CoxPH survival analysis system
 
@@ -67,4 +69,6 @@ git commit -m "🎓 Initial commit: Complete CoxPH survival analysis system
 - Frontend 2: HTML/CSS/JS responsive UI
 - Student/Teacher role filtering
 - Production-ready deployment"
+
+```
 
