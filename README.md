@@ -26,32 +26,30 @@ cd frontend-html && open index.html
 
 Cox Proportional Hazards model trained on weekly project metrics:
 ```bash
-
-text
 Risk = f(days_worked, inactivity_streak, milestones_missed, lab_attendance)
+
 Dataset: project_survival_data.xlsx
 
-
-
-text
 project_id | week_number | days_worked | milestones_missed | event | time_to_event
 
 ```
 📈 Results
 
 ```bash
-text
+
 Hazard Ratio > 1.0 = Higher failure risk
 inactivity_streak: 2.34 (p<0.01) ← STRONG PREDICTOR
+
 ```
 🎓 Academic Paper References
+
 CoxPH + Neural Networks (Nature 2025)
 
 Student dropout prediction (Educational Mining)
 
-text
 
 ### **4. .gitignore**
+
 ```gitignore
 __pycache__/
 *.pyc
