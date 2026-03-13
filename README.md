@@ -1,60 +1,82 @@
-Project Survival Analysis System
+ Project Survival Analysis System
 
-This project is a B.Tech CSE group project designed to predict the risk of student project failure using survival analysis techniques. The system analyzes weekly activity data and estimates the probability that a project may fail before completion.
+This project is part of our B.Tech CSE group project. The main idea of this system is to predict the risk of student project failure before it actually happens.
 
-The main objective is to help mentors identify at-risk projects early so that timely intervention can be made.
+In many cases teachers only realize that a project is failing near the deadline. By that time it is already too late to fix things. Our system tries to detect early warning signals such as inactivity, missed milestones, and low engagement.
 
-Problem Statement
+Using these signals, the system estimates the probability that a project might fail in the coming weeks.
 
-In many academic environments, student project progress is monitored only through milestone submissions or final evaluations. This makes it difficult for instructors to identify struggling teams early.
+ What problem are we solving?
 
-This system attempts to solve that problem by analyzing behavioral indicators such as:
+Most academic project tracking systems only store data like attendance or submission status. They do not analyze patterns in the data.
 
-Number of days worked per week
+For example:
 
-Milestones completed or missed
+A team stops working for several weeks
 
-Lab attendance
+Milestones are repeatedly missed
 
-Inactivity streak
+Lab attendance drops
 
-Using these signals, the system estimates failure risk over time.
+These signals usually appear before a project fails, but they are rarely analyzed.
 
-Methodology
+Our system tries to analyze these patterns and provide risk estimation using machine learning.
 
-The project uses the Cox Proportional Hazards model, a survival analysis technique that predicts the time until a specific event occurs.
+🔬 Methodology
 
-In this project, the event represents project failure or dropout.
+We use a Cox Proportional Hazards model, which is commonly used in survival analysis.
 
-The model analyzes weekly project activity data and estimates how different factors influence the probability of failure.
+Instead of predicting only yes or no failure, survival models estimate how risk changes over time.
 
-Example model relationship:
+The model uses weekly project data such as:
+
+days worked
+
+inactivity streak
+
+milestones missed
+
+lab attendance
+
+The model then estimates how these factors influence the probability of project failure.
+
+Example idea:
 
 Risk = f(days_worked, inactivity_streak, milestones_missed, lab_attendance)
 
-A hazard ratio greater than 1 indicates that the variable increases the risk of project failure.
+If the hazard ratio of a variable is greater than 1, it means that the variable increases the risk of failure.
 
-System Architecture
+⚙️ Features
 
-The project is divided into three main components:
+Our system includes a few basic features:
 
-Backend
-Handles dataset processing, model training, and API communication.
+Student View
+Students can view only their own project information and progress.
 
-Frontend (Streamlit)
-Provides an interactive dashboard for visualizing project data and risk predictions.
+Teacher View
+Teachers can access a dashboard that shows all project data.
 
-Frontend (HTML Interface)
-A lightweight web interface that allows basic interaction with the system.
+Weekly Activity Tracking
+Tracks engagement indicators such as working days, milestone completion, and inactivity.
 
-The dataset is stored using an Excel file for simplicity and easy modification.
+Risk Prediction
+The survival model estimates failure risk using the collected data.
 
-Dataset Structure
+Two Interfaces
+We implemented two interfaces:
 
-The system uses a weekly project monitoring dataset with the following fields:
+Streamlit dashboard
+
+HTML / Flask interface
+
+🗂 Dataset Structure
+
+The system stores project activity data in an Excel file.
+
+Example structure:
 
 project_id
-student_id / team_id
+student_id
 week_number
 days_worked_this_week
 days_since_last_work
@@ -65,26 +87,9 @@ inactivity_streak
 event
 time_to_event
 
-Each row represents the weekly activity record of a project.
+Each row represents the weekly progress of a project.
 
-Features
-
-Student View
-Students can view only their own project information and progress data.
-
-Teacher View
-Teachers can access a dashboard that displays all project records and risk predictions.
-
-Weekly Tracking
-Tracks engagement indicators such as working days, milestone completion, and inactivity.
-
-Risk Estimation
-Uses the Cox Proportional Hazards model to estimate the probability of project failure.
-
-Dual Interface
-The system includes both a Streamlit-based interface and a basic HTML interface.
-
-Technology Stack
+🧠 Technologies Used
 
 Programming Language
 Python
@@ -92,17 +97,16 @@ Python
 Libraries
 Pandas
 NumPy
-Lifelines (Survival Analysis)
+Lifelines (for survival analysis)
 Streamlit
 Flask
-OpenPyXL
 
 Frontend
 HTML
 CSS
 JavaScript
 
-Project Structure
+📂 Project Structure
 project-survival-analysis/
 │
 ├── backend/
@@ -119,41 +123,39 @@ project-survival-analysis/
 │
 ├── requirements.txt
 └── README.md
-How to Run the Project
+🚀 How to Run the Project
 
-Install dependencies
+Install the required libraries:
 
 pip install -r requirements.txt
 
-Run the backend server
+Run the backend server:
 
 cd backend
 python app.py
 
-Run the Streamlit interface
+Run the Streamlit interface:
 
 cd frontend-streamlit
 streamlit run frontend.py
 
-Open the HTML interface
+Open the HTML interface:
 
 cd frontend-html
 open index.html
-Expected Results
+📈 Expected Outcome
 
-The system produces survival analysis outputs that indicate which behavioral factors significantly affect project failure risk.
+The system identifies key behavioral signals that indicate project failure risk.
 
-Example interpretation:
+For example, during testing we observed that long inactivity streaks strongly increase failure risk.
 
-If the hazard ratio for inactivity_streak is greater than 1, it means that increasing inactivity significantly increases the probability of project failure.
+This type of information can help teachers intervene earlier and guide students before the project collapses.
 
-This allows mentors to identify students who may require guidance or support earlier in the semester.
+🎓 Academic Context
 
-Academic Context
+This project is developed as part of our B.Tech Computer Science semester project.
 
-This project was developed as part of a Design Thinking and Innovation / Data Analytics based academic project in the B.Tech Computer Science program.
-
-The work combines concepts from:
+It combines concepts from:
 
 Educational Data Mining
 
@@ -161,8 +163,4 @@ Survival Analysis
 
 Predictive Analytics
 
-Student Performance Monitoring
-
-License
-
-This project is developed for academic and research purposes.
+The goal is to explore how data-driven approaches can help improve academic project monitoring.
