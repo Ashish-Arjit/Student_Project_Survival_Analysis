@@ -1,74 +1,168 @@
-# 🔴 Project Survival Analysis System
+Project Survival Analysis System
 
-**B.Tech CSE Group Project** - Predicts student project failure risk using Cox Proportional Hazards model.
+This project is a B.Tech CSE group project designed to predict the risk of student project failure using survival analysis techniques. The system analyzes weekly activity data and estimates the probability that a project may fail before completion.
 
-## ✨ Features
-- ✅ Student view: See only YOUR projects
-- ✅ Teacher view: Full admin dashboard  
-- ✅ Weekly tracking: days worked, milestones, inactivity
-- ✅ CoxPH Survival Model with time-varying covariates
-- ✅ 2 Frontends: Streamlit + HTML/Flask
-- ✅ Excel data persistence
+The main objective is to help mentors identify at-risk projects early so that timely intervention can be made.
 
-## 🚀 Quick Start
-```bash
-# Backend (Member 1)
-cd backend && pip install -r requirements.txt && python app.py
+Problem Statement
 
-# Streamlit (Member 2) 
-cd frontend-streamlit && streamlit run frontend.py
+In many academic environments, student project progress is monitored only through milestone submissions or final evaluations. This makes it difficult for instructors to identify struggling teams early.
 
-# HTML (Member 3)
-cd frontend-html && open index.html
+This system attempts to solve that problem by analyzing behavioral indicators such as:
 
-```
-🔬 Methodology
+Number of days worked per week
 
-Cox Proportional Hazards model trained on weekly project metrics:
-```bash
+Milestones completed or missed
+
+Lab attendance
+
+Inactivity streak
+
+Using these signals, the system estimates failure risk over time.
+
+Methodology
+
+The project uses the Cox Proportional Hazards model, a survival analysis technique that predicts the time until a specific event occurs.
+
+In this project, the event represents project failure or dropout.
+
+The model analyzes weekly project activity data and estimates how different factors influence the probability of failure.
+
+Example model relationship:
+
 Risk = f(days_worked, inactivity_streak, milestones_missed, lab_attendance)
 
-Dataset: project_survival_data.xlsx
+A hazard ratio greater than 1 indicates that the variable increases the risk of project failure.
 
-project_id | week_number | days_worked | milestones_missed | event | time_to_event
+System Architecture
 
-```
-📈 Results
+The project is divided into three main components:
 
-```bash
+Backend
+Handles dataset processing, model training, and API communication.
 
-Hazard Ratio > 1.0 = Higher failure risk
-inactivity_streak: 2.34 (p<0.01) ← STRONG PREDICTOR
+Frontend (Streamlit)
+Provides an interactive dashboard for visualizing project data and risk predictions.
 
-```
-🎓 Academic Paper References
+Frontend (HTML Interface)
+A lightweight web interface that allows basic interaction with the system.
 
-CoxPH + Neural Networks (Nature 2025)
+The dataset is stored using an Excel file for simplicity and easy modification.
 
-Student dropout prediction (Educational Mining)
+Dataset Structure
 
+The system uses a weekly project monitoring dataset with the following fields:
 
-### **4. .gitignore**
+project_id
+student_id / team_id
+week_number
+days_worked_this_week
+days_since_last_work
+lab_attended_this_week
+milestones_completed_till_week
+milestones_missed_till_week
+inactivity_streak
+event
+time_to_event
 
-```gitignore
-__pycache__/
-*.pyc
-*.xlsx
-.DS_Store
-.venv/
-.env
-```
+Each row represents the weekly activity record of a project.
 
-5. Commit Messages
-```bash
-git add .
-git commit -m "🎓 Initial commit: Complete CoxPH survival analysis system
+Features
 
-- Backend: Flask API + CoxPHFitter model
-- Frontend 1: Streamlit dashboard w/ role-based access  
-- Frontend 2: HTML/CSS/JS responsive UI
-- Student/Teacher role filtering
-- Production-ready deployment"
+Student View
+Students can view only their own project information and progress data.
 
-```
+Teacher View
+Teachers can access a dashboard that displays all project records and risk predictions.
 
+Weekly Tracking
+Tracks engagement indicators such as working days, milestone completion, and inactivity.
+
+Risk Estimation
+Uses the Cox Proportional Hazards model to estimate the probability of project failure.
+
+Dual Interface
+The system includes both a Streamlit-based interface and a basic HTML interface.
+
+Technology Stack
+
+Programming Language
+Python
+
+Libraries
+Pandas
+NumPy
+Lifelines (Survival Analysis)
+Streamlit
+Flask
+OpenPyXL
+
+Frontend
+HTML
+CSS
+JavaScript
+
+Project Structure
+project-survival-analysis/
+│
+├── backend/
+│   └── app.py
+│
+├── frontend-streamlit/
+│   └── frontend.py
+│
+├── frontend-html/
+│   └── index.html
+│
+├── dataset/
+│   └── project_survival_data.xlsx
+│
+├── requirements.txt
+└── README.md
+How to Run the Project
+
+Install dependencies
+
+pip install -r requirements.txt
+
+Run the backend server
+
+cd backend
+python app.py
+
+Run the Streamlit interface
+
+cd frontend-streamlit
+streamlit run frontend.py
+
+Open the HTML interface
+
+cd frontend-html
+open index.html
+Expected Results
+
+The system produces survival analysis outputs that indicate which behavioral factors significantly affect project failure risk.
+
+Example interpretation:
+
+If the hazard ratio for inactivity_streak is greater than 1, it means that increasing inactivity significantly increases the probability of project failure.
+
+This allows mentors to identify students who may require guidance or support earlier in the semester.
+
+Academic Context
+
+This project was developed as part of a Design Thinking and Innovation / Data Analytics based academic project in the B.Tech Computer Science program.
+
+The work combines concepts from:
+
+Educational Data Mining
+
+Survival Analysis
+
+Predictive Analytics
+
+Student Performance Monitoring
+
+License
+
+This project is developed for academic and research purposes.
